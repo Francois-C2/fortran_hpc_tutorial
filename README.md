@@ -1,4 +1,4 @@
-C++ HPC Tutorial
+Fortran HPC Tutorial
 ===
 
 ## Instructions
