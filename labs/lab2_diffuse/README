@@ -1,0 +1,65 @@
+
+Reproducibility package for the publication:
+
+Can Fortran's `do concurrent' Replace Directives for Accelerated Computing?
+Miko M. Stulajter, Ronald M. Caplan, and Jon A. Linker
+
+####################################################################################
+
+Folder and files contents:
+
+- build_and_run_tests.sh  : The main test run script
+- clean.sh                : Removes files from tmp, bin, and results.
+- bin/                    : Where all source codes are compiled to
+- input/                  : Contains input for the test run.
+- ref/                    : Contains a reference result to check for solution accuracy
+- singularity_containers/ : Contains all singularity containers
+- src/                    : Contains all the necessary source codes and scripts
+- tmp/                    : Where the Makefiles are generated and codes compiled
+
+####################################################################################
+
+INSTRUCTIONS:
+
+1) Open the "build_and_run_tests.sh" script in a text editor and
+   set your architecture-specific flags (see the script for details).
+
+2a) To run all tests (including NVIDIA GPU tests), run the script as:
+
+   ./build_run_test ALL
+
+2b) To only run a subset of tests, use the following options instead of "ALL":
+
+   ALL                     : runs all GPU and CPU cases
+   CPU_All                 : runs only CPU cases
+   GPU                     : runs only GPU cocasesdes
+   CPU_Parallel            : runs only parallel CPU cases
+   CPU_Serial              : runs only serial CPU cases
+
+####################################################################################
+#
+#   You can also run a custom set of cases using an array, i.e. :
+#
+#  ./build_run_test "1 2 3"
+#
+#  where each number corresponds with the following cases:
+#
+#      1 - nvfortran_CPU_Original       (Original code, nvfortran, CPU, parallel, OpenACC)
+#      2 - nvfortran_CPU_Original_mp    (Original code, nvfortran, CPU, parallel, OpenMP)
+#      3 - nvfortran_CPU_New            (New code, nvfortran, CPU, parallel, DC+OpenACC)
+#      4 - nvfortran_CPU_EXP            (Experimental code, nvfortran, CPU, parallel, DC)
+#      5 - gfortran_CPU_Original        (Original code, gfortran, CPU, parallel, OpenMP)
+#      6 - gfortran_CPU_New             (New code, gfortran, CPU, parallel, DC+OpenMP)
+#      7 - gfortran_CPU_EXP             (Experimental code, gfortran, CPU, parallel, DC)
+#      8 - ifort_CPU_Original           (Original code, ifort, CPU, parallel, OpenMP)
+#      9 - ifort_CPU_New                (New code, ifort, CPU, parallel, DC+OpenMP)
+#     10 - nvfortran_CPU_Serial         (Serial code, nvfortran, CPU, serial, None)
+#     11 - gfortran_CPU_Serial          (Serial code, gfortran, CPU, serial, None)
+#     12 - ifort_CPU_Serial             (Serial code, ifort, CPU, serial, None)
+#     13 - nvfortran_GPU_Original       (Original code, nvfortran, GPU, parallel, OpenACC)
+#     14 - nvfortran_GPU_New            (New code, nvfortran, GPU, parallel, DC+OpenACC)
+#     15 - nvfortran_GPU_EXP            (Experimental code, nvfortran, GPU, parallel, DC)
+#     16 - gfortran_GPU_Original        (Original code, gfortran, GPU, parallel, OpenACC)
+#
+#####################################################################################
+
