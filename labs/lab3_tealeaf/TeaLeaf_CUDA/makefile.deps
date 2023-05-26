@@ -1,0 +1,136 @@
+
+tea_solve.o :  \
+	tea_leaf_cheby.o \
+	tea_leaf_cg.o \
+	data.o \
+	tea_leaf_ppcg.o \
+	tea_leaf_jacobi.o \
+	report.o \
+	update_halo.o \
+	tea_leaf_common.o
+
+start.o :  \
+	set_field.o \
+	update_halo.o \
+	parse.o \
+	tea.o
+
+tea_leaf_common.o :  \
+	definitions.o
+
+tea_leaf_cheby.o :  \
+	definitions.o
+
+generate_chunk.o :  \
+	tea.o
+
+parse.o :  \
+	report.o \
+	data.o \
+	tea.o
+
+timestep.o :  \
+	update_halo.o \
+	calc_dt.o \
+	report.o \
+	definitions.o \
+	tea.o
+
+tea_leaf_cg.o :  \
+	definitions.o
+
+tea_leaf.o :  \
+	tea.o
+
+field_summary.o :  \
+	tea.o
+
+initialise_chunk.o :  \
+	tea.o \
+	definitions.o
+
+calc_dt.o :  \
+	tea.o
+
+definitions.o :  \
+	data.o
+
+build_field.o :  \
+	tea.o
+
+timer.o : 
+
+update_halo.o :  \
+	report.o \
+	tea.o
+
+global_mpi.o :  \
+	definitions.o
+
+tea.o :  \
+	global_mpi.o \
+	report.o \
+	definitions.o
+
+tea_leaf_ppcg.o :  \
+	tea_leaf_cheby.o \
+	definitions.o
+
+tea_leaf_jacobi.o :  \
+	definitions.o
+
+read_input.o :  \
+	report.o \
+	parse.o \
+	tea.o
+
+data.o : 
+
+initialise.o :  \
+	report.o \
+	parse.o \
+	tea.o
+
+diffuse.o :  \
+	timestep.o \
+	tea_solve.o \
+	tea.o
+
+report.o :  \
+	global_mpi.o \
+	data.o
+
+set_field.o :  \
+	tea.o
+
+cuda_errors.o: cuda_errors.cu cuda_common.hpp \
+ kernel_files/cuda_kernel_header.hpp kernel_files/../ftocmacros.h
+cuda_strings.o: cuda_strings.cu cuda_strings.hpp
+field_summary_kernel_cuda.o: field_summary_kernel_cuda.cu cuda_common.hpp \
+ kernel_files/cuda_kernel_header.hpp kernel_files/../ftocmacros.h \
+ kernel_files/field_summary_kernel.cuknl host_reductions_kernel_cuda.hpp \
+ kernel_files/reductions_kernel.cuknl
+generate_chunk_kernel_cuda.o: generate_chunk_kernel_cuda.cu \
+ kernel_files/cuda_kernel_header.hpp kernel_files/../ftocmacros.h \
+ kernel_files/generate_chunk_kernel.cuknl
+init_cuda.o: init_cuda.cu cuda_common.hpp \
+ kernel_files/cuda_kernel_header.hpp kernel_files/../ftocmacros.h \
+ cuda_strings.hpp 
+initialise_chunk_kernel_cuda.o: initialise_chunk_kernel_cuda.cu \
+ kernel_files/cuda_kernel_header.hpp kernel_files/../ftocmacros.h \
+ kernel_files/initialise_chunk_kernel.cuknl
+pack_kernel_cuda.o: pack_kernel_cuda.cu cuda_common.hpp \
+ kernel_files/cuda_kernel_header.hpp kernel_files/../ftocmacros.h \
+ kernel_files/pack_kernel.cuknl
+set_field_kernel_cuda.o: set_field_kernel_cuda.cu cuda_common.hpp \
+ kernel_files/cuda_kernel_header.hpp kernel_files/../ftocmacros.h \
+ kernel_files/set_field_kernel.cuknl
+tea_leaf_kernel_cuda.o: tea_leaf_kernel_cuda.cu cuda_common.hpp \
+ kernel_files/cuda_kernel_header.hpp kernel_files/../ftocmacros.h \
+ kernel_files/tea_leaf_common.cuknl kernel_files/tea_leaf_jacobi.cuknl \
+ kernel_files/tea_leaf_cg.cuknl kernel_files/tea_leaf_cheby.cuknl \
+ kernel_files/tea_leaf_ppcg.cuknl host_reductions_kernel_cuda.hpp \
+ kernel_files/reductions_kernel.cuknl
+update_halo_kernel_cuda.o: update_halo_kernel_cuda.cu cuda_common.hpp \
+ kernel_files/cuda_kernel_header.hpp kernel_files/../ftocmacros.h \
+ kernel_files/update_halo_kernel.cuknl

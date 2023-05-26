@@ -1,0 +1,96 @@
+/*
+ *  Kernels used for halo updates
+ */
+
+__global__ void device_update_halo_kernel_bottom
+(kernel_info_t kernel_info,
+cell_info_t grid_type,
+double * __restrict cur_array,
+int depth)
+{
+    __attribute__((__unused__)) int x_extra = grid_type.x_extra;
+    __attribute__((__unused__)) int y_extra = grid_type.y_extra;
+    __attribute__((__unused__)) int x_invert = grid_type.x_invert;
+    __attribute__((__unused__)) int y_invert = grid_type.y_invert;
+    __attribute__((__unused__)) int x_face = grid_type.x_face;
+    __attribute__((__unused__)) int y_face = grid_type.y_face;
+
+    __kernel_indexes;
+
+    if (row >= HALO_DEPTH - depth && row <= (y_max + HALO_DEPTH - 1) + y_extra + depth)
+    {
+        const size_t src = 1 + (HALO_DEPTH - column - 1)*2;
+        const size_t dst = 0;
+        cur_array[THARR2D(dst, 0, x_extra)] = y_invert * cur_array[THARR2D(src, 0, x_extra)];
+    }
+}
+
+__global__ void device_update_halo_kernel_top
+(kernel_info_t kernel_info,
+cell_info_t grid_type,
+double * __restrict cur_array,
+int depth)
+{
+    __attribute__((__unused__)) int x_extra = grid_type.x_extra;
+    __attribute__((__unused__)) int y_extra = grid_type.y_extra;
+    __attribute__((__unused__)) int x_invert = grid_type.x_invert;
+    __attribute__((__unused__)) int y_invert = grid_type.y_invert;
+    __attribute__((__unused__)) int x_face = grid_type.x_face;
+    __attribute__((__unused__)) int y_face = grid_type.y_face;
+
+    __kernel_indexes;
+
+    if (row >= HALO_DEPTH - depth && row <= (y_max + HALO_DEPTH - 1) + y_extra + depth)
+    {
+        const size_t src = x_max + x_extra;
+        const size_t dst = x_max + x_extra + (HALO_DEPTH - column - 1)*2 + 1;
+        cur_array[THARR2D(dst, 0, x_extra)] = cur_array[THARR2D(src, 0, x_extra)];
+    }
+}
+
+__global__ void device_update_halo_kernel_left
+(kernel_info_t kernel_info,
+cell_info_t grid_type,
+double * __restrict cur_array,
+int depth)
+{
+    __attribute__((__unused__)) int x_extra = grid_type.x_extra;
+    __attribute__((__unused__)) int y_extra = grid_type.y_extra;
+    __attribute__((__unused__)) int x_invert = grid_type.x_invert;
+    __attribute__((__unused__)) int y_invert = grid_type.y_invert;
+    __attribute__((__unused__)) int x_face = grid_type.x_face;
+    __attribute__((__unused__)) int y_face = grid_type.y_face;
+
+    __kernel_indexes;
+
+    if (column >= HALO_DEPTH - depth && column <= (x_max + HALO_DEPTH - 1) + x_extra + depth)
+    {
+        const size_t src = 1 + (HALO_DEPTH - row - 1)*2;
+        const size_t dst = 0;
+        cur_array[THARR2D(0, dst, x_extra)] = y_invert * cur_array[THARR2D(0, src, x_extra)];
+    }
+}
+
+__global__ void device_update_halo_kernel_right
+(kernel_info_t kernel_info,
+cell_info_t grid_type,
+double * __restrict cur_array,
+int depth)
+{
+    __attribute__((__unused__)) int x_extra = grid_type.x_extra;
+    __attribute__((__unused__)) int y_extra = grid_type.y_extra;
+    __attribute__((__unused__)) int x_invert = grid_type.x_invert;
+    __attribute__((__unused__)) int y_invert = grid_type.y_invert;
+    __attribute__((__unused__)) int x_face = grid_type.x_face;
+    __attribute__((__unused__)) int y_face = grid_type.y_face;
+
+    __kernel_indexes;
+
+    if (column >= HALO_DEPTH - depth && column <= (x_max + HALO_DEPTH - 1) + x_extra + depth)
+    {
+        const size_t src = y_max + y_extra;
+        const size_t dst = y_max + y_extra + (HALO_DEPTH - row - 1)*2 + 1;
+        cur_array[THARR2D(0, dst, x_extra)] = cur_array[THARR2D(0, src, x_extra)];
+    }
+}
+
