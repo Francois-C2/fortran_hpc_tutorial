@@ -1,0 +1,158 @@
+
+set_field_kernel.o : 
+
+tea_leaf_common_kernel.o : 
+
+tea_leaf_ppcg_kernel.o :  \
+	tea_leaf_common_kernel.o
+
+tea_leaf_jacobi_kernel.o : 
+
+tea_solve.o :  \
+	tea_leaf_cheby.o \
+	tea_leaf_cg.o \
+	data.o \
+	tea_leaf_ppcg.o \
+	tea_leaf_jacobi.o \
+	report.o \
+	update_halo.o \
+	tea_leaf_common.o
+
+build_field.o :  \
+	tea.o
+
+tea_leaf_common.o :  \
+	tea_leaf_common_kernel.o \
+	report.o \
+	definitions.o
+
+tea_leaf_cheby.o :  \
+	tea_leaf_cheby_kernel.o \
+	update_halo.o \
+	definitions.o \
+	tea_leaf_common.o 
+
+generate_chunk.o :  \
+	generate_chunk_kernel.o \
+	tea.o
+
+pack.o :  \
+	report.o \
+	pack_kernel.o \
+	definitions.o
+
+field_summary_kernel.o : 
+
+parse.o :  \
+	report.o \
+	data.o \
+	tea.o
+
+timestep.o :  \
+	update_halo.o \
+	calc_dt.o \
+	report.o \
+	definitions.o \
+	tea.o
+
+visit.o :  \
+	update_halo.o \
+	tea.o
+
+tea_leaf_cg.o :  \
+	tea_leaf_cg_kernel.o \
+	definitions.o
+
+tea_leaf.o :  \
+	tea.o
+
+field_summary.o :  \
+	field_summary_kernel.o \
+	tea.o
+
+initialise_chunk.o :  \
+	initialise_chunk_kernel.o \
+	tea.o \
+	definitions.o
+
+calc_dt.o :  \
+	tea.o
+
+definitions.o :  \
+	data.o
+
+tea_leaf_cg_kernel.o :  \
+	tea_leaf_common_kernel.o \
+        tea_leaf_ppcg.o \
+        definitions.o
+
+start.o :  \
+	set_field.o \
+	update_halo.o \
+	parse.o \
+	tea.o
+
+generate_chunk_kernel.o : 
+
+timer.o : 
+
+initialise_chunk_kernel.o : 
+
+update_halo.o :  \
+	update_halo_kernel.o \
+	update_internal_halo_kernel.o \
+	report.o \
+	tea.o
+
+global_mpi.o :  \
+	definitions.o
+
+tea.o :  \
+	pack.o \
+	global_mpi.o \
+	report.o \
+	definitions.o
+
+tea_leaf_ppcg.o :  \
+	tea_leaf_cheby.o \
+	tea_leaf_ppcg_kernel.o \
+        update_halo.o \
+	definitions.o
+
+update_halo_kernel.o : 
+
+tea_leaf_jacobi.o :  \
+	tea_leaf_jacobi_kernel.o \
+	definitions.o
+
+pack_kernel.o : 
+
+update_internal_halo_kernel.o : 
+
+read_input.o :  \
+	report.o \
+	parse.o \
+	tea.o
+
+data.o : 
+
+initialise.o :  \
+	report.o \
+	parse.o \
+	tea.o
+
+tea_leaf_cheby_kernel.o :  \
+	tea_leaf_common_kernel.o
+
+diffuse.o :  \
+	timestep.o \
+	tea_solve.o \
+	tea.o
+
+set_field.o :  \
+	set_field_kernel.o \
+	tea.o
+
+report.o :  \
+	global_mpi.o \
+	data.o
