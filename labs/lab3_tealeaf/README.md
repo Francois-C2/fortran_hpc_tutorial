@@ -36,6 +36,10 @@ Other versions invoke third party linear solvers and currently include
 PETSc, Trilinos and Hypre. For each of these version there are instructions on
 how to download, build and link in the relevant library.
 
+## Download
+
+git clone https://github.com/UK-MAC/TeaLeaf
+
 ## Current Implementations:
 
 - Fortran with OpenMP and MPI
