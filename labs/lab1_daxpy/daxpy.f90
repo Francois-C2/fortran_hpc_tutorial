@@ -24,6 +24,7 @@ module sm
         real(kind=8),dimension(:) :: x, y
         real(kind=8) :: a
         integer :: n, i  
+        !TODO Parallelize the loop
         do i=1,n
           y(i) = a*x(i)+y(i)
         enddo  
