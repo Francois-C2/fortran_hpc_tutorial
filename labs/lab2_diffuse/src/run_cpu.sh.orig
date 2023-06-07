@@ -18,13 +18,13 @@ cd results
 
 #nvfortran
 if [[ ${Compiler} == "nvfortran" ]]; then
-	singularity exec --nv --home ${PWD}/.. /bootcamp_scripts/ISO_PROGRAMMING/stdpar_sc.simg ../src/run_diffuse_p1.sh ${Compiler}_GPU_${Code} ../bin/diffuse_${Compiler}_GPU_${Code}
+	singularity exec --home ${PWD}/.. ../singularity_containers/nvfortran.sif ../src/run_diffuse_p1.sh ${Compiler}_CPU_${Code} ../bin/diffuse_${Compiler}_CPU_${Code}
 #gfortran
+elif [[ ${Compiler} == "gfortran" ]]; then
+	singularity exec --home ${PWD}/.. ../singularity_containers/gfortran.sif ../src/run_diffuse_p1.sh ${Compiler}_CPU_${Code} ../bin/diffuse_${Compiler}_CPU_${Code}
+#ifort
 else
-	singularity exec --nv --home ${PWD}/.. /bootcamp_scripts/ISO_PROGRAMMING/stdpar_sc.simg ../src/run_diffuse_p1.sh ${Compiler}_GPU_${Code} ../bin/diffuse_${Compiler}_GPU_${Code}
+	singularity exec --home ${PWD}/.. ../singularity_containers/ifort.sif ../src/run_diffuse_p1.sh ${Compiler}_CPU_${Code} ../bin/diffuse_${Compiler}_CPU_${Code}
 fi
-
-
-
 
 
