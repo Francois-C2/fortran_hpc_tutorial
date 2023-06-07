@@ -178,6 +178,6 @@ for j in ${!To_Run[@]}; do
 done
 echo "Collecting results into timing_results.txt..."
 # time file creation
-singularity exec --home ${PWD} singularity_containers/ifort.sif python3 src/get_time.py
+#singularity exec --home ${PWD} singularity_containers/ifort.sif python3 src/get_time.py
+singularity exec --home ${PWD} /bootcamp_scripts/ISO_PROGRAMMING/stdpar_sc.simg python3 src/get_time.py
 cat timing_results.txt
-

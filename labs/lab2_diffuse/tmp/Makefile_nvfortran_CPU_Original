@@ -1,0 +1,47 @@
+
+FCFLAGS_COMP_SPECIFIC = -march=native
+
+F90_PAR_OPTS = -acc=multicore -Minfo=accel
+TARGET = diffuse_nvfortran_CPU_Original
+PREFIX=/opt/psi/nv
+
+
+FC = nvfortran
+
+FCFLAGS = $(FCFLAGS_COMP_SPECIFIC) -O3 -I${PREFIX}/ext_deps/deps/hdf5/include
+
+LDFLAGS = -L${PREFIX}/ext_deps/deps/hdf5/lib -lhdf5_fortran -lhdf5hl_fortran -lhdf5 -lhdf5_hl
+
+OBJS = \
+ number_types.o \
+ zm_parse_modules.o \
+ zm_parse.o \
+ zm_sds_modules.o \
+ zm_sds.o\
+ $(TARGET).o
+
+all: $(OBJS)
+	$(FC) $(FCFLAGS) $(F90_PAR_OPTS) $(OBJS) $(LDFLAGS) -o $(TARGET)
+	rm -f *.mod *.o
+
+clean:
+	rm -f *.mod *.o
+
+number_types.o: ../src/number_types.f
+	$(FC) -c $(FCFLAGS) $(F90_PAR_OPTS) $<
+
+zm_parse_modules.o: ../src/zm_parse_modules.f
+	$(FC) -c $(FCFLAGS) $(F90_PAR_OPTS) $<
+
+zm_parse.o: ../src/zm_parse.f ../src/zm_parse_modules.f ../src/number_types.f
+	$(FC) -c $(FCFLAGS) $(F90_PAR_OPTS) $<
+
+zm_sds_modules.o: ../src/zm_sds_modules.f
+	$(FC) -c $(FCFLAGS) $(F90_PAR_OPTS) $<
+
+zm_sds.o: ../src/zm_sds.f ../src/zm_sds_modules.f ../src/number_types.f
+	$(FC) -c $(FCFLAGS) $(F90_PAR_OPTS) $<
+
+$(TARGET).o: ../src/diffuse_Original.f
+	$(FC) -o $(TARGET).o -c $(FCFLAGS) $(F90_PAR_OPTS) $<
+
