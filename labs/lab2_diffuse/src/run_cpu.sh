@@ -9,6 +9,12 @@ Compiler=$1
 Code=$2
 ###########################################################################
 
+echo "working directory : $PWD"
+echo "Compiler: $Compiler"
+echo "Code: $Code"
+
+mkdir -p results
+
 cd results
 ###########################################################################
 #
@@ -18,13 +24,16 @@ cd results
 
 #nvfortran
 if [[ ${Compiler} == "nvfortran" ]]; then
-	singularity exec --home ${PWD}/.. /bootcamp_scripts/ISO_PROGRAMMING/stdpar_sc.simg ../src/run_diffuse_p1.sh ${Compiler}_CPU_${Code} ../bin/diffuse_${Compiler}_CPU_${Code}
+	export LD_LIBRARY_PATH=/opt/psi/nv/ext_deps/deps/hdf5/lib:$LD_LIBRARY_PATH
+	../src/run_diffuse_p1.sh ${Compiler}_CPU_${Code} ../bin/diffuse_${Compiler}_CPU_${Code}
 #gfortran
 elif [[ ${Compiler} == "gfortran" ]]; then
-	singularity exec --home ${PWD}/.. /bootcamp_scripts/ISO_PROGRAMMING/stdpar_sc.simg ../src/run_diffuse_p1.sh ${Compiler}_CPU_${Code} ../bin/diffuse_${Compiler}_CPU_${Code}
+	export LD_LIBRARY_PATH=/opt/psi/gnu/ext_deps/deps/hdf5/lib:$LD_LIBRARY_PATH
+	../src/run_diffuse_p1.sh ${Compiler}_CPU_${Code} ../bin/diffuse_${Compiler}_CPU_${Code}
 #ifort
 else
-	singularity exec --home ${PWD}/.. /bootcamp_scripts/ISO_PROGRAMMING/stdpar_sc.simg ../src/run_diffuse_p1.sh ${Compiler}_CPU_${Code} ../bin/diffuse_${Compiler}_CPU_${Code}
+	export LD_LIBRARY_PATH=/opt/psi/intel/ext_deps/deps/hdf5/lib:$LD_LIBRARY_PATH
+	../src/run_diffuse_p1.sh ${Compiler}_CPU_${Code} ../bin/diffuse_${Compiler}_CPU_${Code}
 fi
 
 

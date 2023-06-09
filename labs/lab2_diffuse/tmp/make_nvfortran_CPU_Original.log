@@ -1,8 +1,0 @@
-nvfortran -c -march=native -O3 -I/opt/psi/nv/ext_deps/deps/hdf5/include -acc=multicore -Minfo=accel ../src/number_types.f
-nvfortran -c -march=native -O3 -I/opt/psi/nv/ext_deps/deps/hdf5/include -acc=multicore -Minfo=accel ../src/zm_parse_modules.f
-nvfortran -c -march=native -O3 -I/opt/psi/nv/ext_deps/deps/hdf5/include -acc=multicore -Minfo=accel ../src/zm_parse.f
-nvfortran -c -march=native -O3 -I/opt/psi/nv/ext_deps/deps/hdf5/include -acc=multicore -Minfo=accel ../src/zm_sds_modules.f
-nvfortran -c -march=native -O3 -I/opt/psi/nv/ext_deps/deps/hdf5/include -acc=multicore -Minfo=accel ../src/zm_sds.f
-NVFORTRAN-F-0004-Unable to open MODULE file hdf5.mod (../src/zm_sds.f: 925)
-NVFORTRAN/x86-64 Linux 22.11-0: compilation aborted
-make: *** [Makefile_nvfortran_CPU_Original:43: zm_sds.o] Error 2

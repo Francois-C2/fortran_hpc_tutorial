@@ -21,6 +21,8 @@ Folder and files contents:
 
 INSTRUCTIONS:
 
+0) source /opt/intel/oneapi/setvars.sh
+
 1) Open the "build_and_run_tests.sh" script in a text editor and
    set your architecture-specific flags (see the script for details).
 

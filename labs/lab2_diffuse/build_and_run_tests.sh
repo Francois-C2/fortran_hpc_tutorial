@@ -101,7 +101,7 @@ FFLAGS_GF_CPU='-march=native -fcray-pointer -fallow-argument-mismatch -fallow-in
 # ---- For CPU with ifort
 FFLAGS_if_CPU="-march=${CPU_VEC_INSTR} -fp-model precise -heap-arrays"
 # ---- For GPU with nvfortran
-FFLAGS_NV_GPU="-gpu=${NV_GPU_CC},cuda11.4"
+FFLAGS_NV_GPU="-gpu=${NV_GPU_CC},cuda11.8"
 # ---- For GPU with gfortran
 FFLAGS_GF_GPU="-march=native"
 #
@@ -179,5 +179,5 @@ done
 echo "Collecting results into timing_results.txt..."
 # time file creation
 #singularity exec --home ${PWD} singularity_containers/ifort.sif python3 src/get_time.py
-singularity exec --home ${PWD} /bootcamp_scripts/ISO_PROGRAMMING/stdpar_sc.simg python3 src/get_time.py
+python3 src/get_time.py
 cat timing_results.txt

@@ -32,7 +32,7 @@ cd ../tmp
 if [[ ${Compiler} == "nvfortran" && ${cpu_or_gpu} == "gpu" ]]; then
         Makefile_compiler="${Compiler}_GPU"
         Singularity="stdpar_sc.simg"
-        singularity exec --nv --home ${PWD}/.. /bootcamp_scripts/ISO_PROGRAMMING/${Singularity} make -f Makefile_${Makefile_compiler}_${Code} 1>make_${Makefile_compiler}_${Code}.log 2>make_${Makefile_compiler}_${Code}.log
+        make -f Makefile_${Makefile_compiler}_${Code} 1>make_${Makefile_compiler}_${Code}.log 2>make_${Makefile_compiler}_${Code}.log
         mv diffuse_${Makefile_compiler}_${Code} ../bin/
         #clean
         rm -f *.mod *.o
@@ -43,7 +43,7 @@ if [[ ${Compiler} == "nvfortran" && ${cpu_or_gpu} == "gpu" ]]; then
 elif [[ ${Compiler} == "nvfortran" && ${cpu_or_gpu} == "cpu" ]]; then
         Makefile_compiler="${Compiler}_CPU"
         Singularity="stdpar_sc.simg"
-        singularity exec --home ${PWD}/.. /bootcamp_scripts/ISO_PROGRAMMING/${Singularity} make -f Makefile_${Makefile_compiler}_${Code} 1>make_${Makefile_compiler}_${Code}.log 2>make_${Makefile_compiler}_${Code}.log
+        make -f Makefile_${Makefile_compiler}_${Code} 1>make_${Makefile_compiler}_${Code}.log 2>make_${Makefile_compiler}_${Code}.log
         mv diffuse_${Makefile_compiler}_${Code} ../bin/
         #clean
         rm -f *.mod *.o
@@ -54,7 +54,7 @@ elif [[ ${Compiler} == "nvfortran" && ${cpu_or_gpu} == "cpu" ]]; then
 elif [[ ${Compiler} == "gfortran" && ${cpu_or_gpu} == "gpu" ]]; then
         Makefile_compiler="${Compiler}_GPU"
         Singularity="stdpar_sc.simg"
-        singularity exec --nv --home ${PWD}/.. /bootcamp_scripts/ISO_PROGRAMMING/${Singularity} make -f Makefile_${Makefile_compiler}_${Code} 1>make_${Makefile_compiler}_${Code}.log 2>make_${Makefile_compiler}_${Code}.log
+        make -f Makefile_${Makefile_compiler}_${Code} 1>make_${Makefile_compiler}_${Code}.log 2>make_${Makefile_compiler}_${Code}.log
         mv diffuse_${Makefile_compiler}_${Code} ../bin/
         #clean
         rm -f *.mod *.o
@@ -65,7 +65,7 @@ elif [[ ${Compiler} == "gfortran" && ${cpu_or_gpu} == "gpu" ]]; then
 elif [[ ${Compiler} == "gfortran" && ${cpu_or_gpu} == "cpu" ]]; then
         Makefile_compiler="${Compiler}_CPU"
         Singularity="stdpar_sc.simg"
-        singularity exec --home ${PWD}/.. /bootcamp_scripts/ISO_PROGRAMMING/${Singularity} make -f Makefile_${Makefile_compiler}_${Code} 1>make_${Makefile_compiler}_${Code}.log 2>make_${Makefile_compiler}_${Code}.log
+        make -f Makefile_${Makefile_compiler}_${Code} 1>make_${Makefile_compiler}_${Code}.log 2>make_${Makefile_compiler}_${Code}.log
         mv diffuse_${Makefile_compiler}_${Code} ../bin/
         #clean
         rm -f *.mod *.o
@@ -76,7 +76,7 @@ elif [[ ${Compiler} == "gfortran" && ${cpu_or_gpu} == "cpu" ]]; then
 else
         Makefile_compiler="${Compiler}_CPU"
         Singularity="stdpar_sc.simg"
-        singularity exec --home ${PWD}/.. /bootcamp_scripts/ISO_PROGRAMMING/${Singularity} make -f Makefile_${Makefile_compiler}_${Code} 1>make_${Makefile_compiler}_${Code}.log 2>make_${Makefile_compiler}_${Code}.log
+        make -f Makefile_${Makefile_compiler}_${Code} 1>make_${Makefile_compiler}_${Code}.log 2>make_${Makefile_compiler}_${Code}.log
         mv diffuse_${Makefile_compiler}_${Code} ../bin/
         #clean
         rm -f *.mod *.o
